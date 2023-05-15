@@ -3,58 +3,12 @@ package seminar3.MVP;
 import seminar3.OwnExceptions.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Scanner;
+
 
 /**
  * Дочерний класс интерфейса ModelBase
  */
 public class ModelFirst implements ModelBase {
-
-    public static void main(String[] args) {
-        ModelFirst model = new ModelFirst();
-        while (true) {
-            try {
-                Scanner sc = new Scanner(System.in);
-
-                System.out.print("DATE: ");
-                String date = sc.nextLine();
-                String date1 = model.dateCheck(date);
-                System.out.println("Ваша дата рождения: " + date1);
-
-                System.out.print("GENDER: ");
-                String gender = sc.nextLine();
-                char gender1 = model.genderCheck(gender);
-                System.out.println("Ваш пол: " + gender1);
-
-                System.out.print("NUMBER: ");
-                String n = sc.nextLine();
-                Long n1 = model.phoneNumberCheck(n);
-                System.out.println("Ваш номер: " + n1);
-
-                System.out.print("NAME: ");
-                String name = sc.nextLine();
-                String name1 = model.anyNameCheck(name);
-                System.out.println("Вашу имя: " + name1);
-
-
-                return;
-
-            } catch (DateFormatException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Формат введенной даты некорректен: " + e.getUserDate());
-            } catch (GenderFormatException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Формат введенного пола некорректен: " + e.getUserGender());
-            } catch (PhoneFormatException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Формат введенного номера некорректен: " + e.getPhoneNumber());
-            } catch (NameFormatException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Формат введенного имени некорректен: " + e.getAnyName());
-            }
-        }
-
-    }
 
     @Override
     public String[] lineCheck(String userLine) throws LineSizeException {
@@ -62,7 +16,10 @@ public class ModelFirst implements ModelBase {
         String[] data = userLine.split(" ");
         // Проверка на количество данных
         if (data.length != 6)
-            throw new LineSizeException("Количество данных не соответствует необходимому количеству", String.join(" ", userLine));
+            throw new LineSizeException(
+                    "Количество данных не соответствует необходимому количеству",
+                    String.join(" ", userLine)
+            );
         return data;
     }
 
